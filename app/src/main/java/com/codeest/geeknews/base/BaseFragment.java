@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  * Created by codeest on 2016/8/2.
  * MVP Fragment基类
  */
-public abstract class BaseFragment<T extends BasePresenter> extends SupportFragment implements BaseView{
+public abstract class BaseFragment<T extends BasePresenter> extends SupportFragment implements BaseView {
 
     @Inject
     protected T mPresenter;
@@ -40,20 +41,21 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         super.onAttach(context);
     }
 
-    protected FragmentComponent getFragmentComponent(){
+    protected FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
                 .appComponent(App.getAppComponent())
                 .fragmentModule(getFragmentModule())
                 .build();
     }
 
-    protected FragmentModule getFragmentModule(){
+    protected FragmentModule getFragmentModule() {
         return new FragmentModule(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("ClassNameThis", this.getClass().getSimpleName() + "");
         mView = inflater.inflate(getLayoutId(), null);
         initInject();
         return mView;
@@ -104,6 +106,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     }
 
     protected abstract void initInject();
+
     protected abstract int getLayoutId();
+
     protected abstract void initEventAndData();
 }
