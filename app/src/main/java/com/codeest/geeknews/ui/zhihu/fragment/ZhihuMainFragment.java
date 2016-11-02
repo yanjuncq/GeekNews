@@ -17,14 +17,14 @@ import butterknife.BindView;
  * Created by codeest on 16/8/11.
  */
 
-public class ZhihuMainFragment extends SimpleFragment{
+public class ZhihuMainFragment extends SimpleFragment {
 
     @BindView(R.id.tab_zhihu_main)
     TabLayout mTabLayout;
     @BindView(R.id.vp_zhihu_main)
     ViewPager mViewPager;
 
-    String[] tabTitle = new String[]{"日报","主题","专栏","热门"};
+    String[] tabTitle = new String[]{"日报", "主题", "专栏", "热门"};
     List<Fragment> fragments = new ArrayList<Fragment>();
 
     ZhihuMainAdapter mAdapter;
@@ -40,7 +40,7 @@ public class ZhihuMainFragment extends SimpleFragment{
         fragments.add(new ThemeFragment());
         fragments.add(new SectionFragment());
         fragments.add(new HotFragment());
-        mAdapter = new ZhihuMainAdapter(getChildFragmentManager(),fragments);
+        mAdapter = new ZhihuMainAdapter(getChildFragmentManager(), fragments);
         mViewPager.setAdapter(mAdapter);
 
         //TabLayout配合ViewPager有时会出现不显示Tab文字的Bug,需要按如下顺序

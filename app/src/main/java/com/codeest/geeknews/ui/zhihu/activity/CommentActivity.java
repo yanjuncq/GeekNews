@@ -45,7 +45,7 @@ public class CommentActivity extends SimpleActivity {
         int longNum = intent.getExtras().getInt("longNum");
         int id = intent.getExtras().getInt("id");
         intent.getExtras().getInt("shortNum");
-        setToolBar(toolBar,String.format("%d条评论",allNum));
+        setToolBar(toolBar, String.format("%d条评论", allNum));
 
         CommentFragment shortCommentFragment = new CommentFragment();
         Bundle shortBundle = new Bundle();
@@ -59,12 +59,12 @@ public class CommentActivity extends SimpleActivity {
         longCommentFragment.setArguments(longBundle);
         fragments.add(shortCommentFragment);
         fragments.add(longCommentFragment);
-        mAdapter = new CommentMainAdapter(getSupportFragmentManager(),fragments);
+        mAdapter = new CommentMainAdapter(getSupportFragmentManager(), fragments);
         mViewPager.setAdapter(mAdapter);
-        mTabLayout.addTab(mTabLayout.newTab().setText(String.format("短评论(%d)",shortNum)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(String.format("长评论(%d)",longNum)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(String.format("短评论(%d)", shortNum)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(String.format("长评论(%d)", longNum)));
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.getTabAt(0).setText(String.format("短评论(%d)",shortNum));
-        mTabLayout.getTabAt(1).setText(String.format("长评论(%d)",longNum));
+        mTabLayout.getTabAt(0).setText(String.format("短评论(%d)", shortNum));
+        mTabLayout.getTabAt(1).setText(String.format("长评论(%d)", longNum));
     }
 }

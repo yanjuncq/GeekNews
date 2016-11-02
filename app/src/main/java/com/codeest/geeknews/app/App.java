@@ -77,7 +77,7 @@ public class App extends Application {
 
     public void addActivity(Activity act) {
         if (allActivities == null) {
-            allActivities = new HashSet<Activity>();
+            allActivities = new HashSet<>();
         }
         allActivities.add(act);
     }

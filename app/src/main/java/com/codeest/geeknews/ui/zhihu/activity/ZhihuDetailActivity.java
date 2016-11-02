@@ -86,10 +86,10 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
 
     @Override
     protected void initEventAndData() {
-        setToolBar(viewToolbar,"");
+        setToolBar(viewToolbar, "");
         Intent intent = getIntent();
         id = intent.getExtras().getInt("id");
-        isNotTransition = intent.getBooleanExtra("isNotTransition",false);
+        isNotTransition = intent.getBooleanExtra("isNotTransition", false);
         mPresenter.queryLikeData(id);
         mPresenter.getDetailData(id);
         mPresenter.getExtraData(id);
@@ -112,7 +112,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
-        wvDetailContent.setWebViewClient(new WebViewClient(){
+        wvDetailContent.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -122,10 +122,10 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if(scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
+                if (scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
                     isBottomShow = false;
                     llDetailBottom.animate().translationY(llDetailBottom.getHeight());
-                } else if(scrollY - oldScrollY < 0 && !isBottomShow){    //上移出现
+                } else if (scrollY - oldScrollY < 0 && !isBottomShow) {    //上移出现
                     isBottomShow = true;
                     llDetailBottom.animate().translationY(0);
                 }
@@ -135,6 +135,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
             @Override
             public void onTransitionStart(Transition transition) {
             }
+
             @Override
             public void onTransitionEnd(Transition transition) {
                 /**
@@ -148,12 +149,15 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
                     ImageLoader.load(mContext, imgUrl, detailBarImage);
                 }
             }
+
             @Override
             public void onTransitionCancel(Transition transition) {
             }
+
             @Override
             public void onTransitionPause(Transition transition) {
             }
+
             @Override
             public void onTransitionResume(Transition transition) {
             }
@@ -174,15 +178,15 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         }
         clpToolbar.setTitle(zhihuDetailBean.getTitle());
         detailBarCopyright.setText(zhihuDetailBean.getImage_source());
-        String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(),zhihuDetailBean.getCss(),zhihuDetailBean.getJs());
+        String htmlData = HtmlUtil.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
         wvDetailContent.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
     }
 
     @Override
     public void showExtraInfo(DetailExtraBean detailExtraBean) {
         ivProgress.stop();
-        tvDetailBottomLike.setText(String.format("%d个赞",detailExtraBean.getPopularity()));
-        tvDetailBottomComment.setText(String.format("%d条评论",detailExtraBean.getComments()));
+        tvDetailBottomLike.setText(String.format("%d个赞", detailExtraBean.getPopularity()));
+        tvDetailBottomComment.setText(String.format("%d条评论", detailExtraBean.getComments()));
         allNum = detailExtraBean.getComments();
         shortNum = detailExtraBean.getShort_comments();
         longNum = detailExtraBean.getLong_comments();
@@ -204,23 +208,23 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @Override
     public void showError(String msg) {
         ivProgress.stop();
-        SnackbarUtil.showShort(getWindow().getDecorView(),msg);
+        SnackbarUtil.showShort(getWindow().getDecorView(), msg);
     }
 
     @OnClick(R.id.tv_detail_bottom_comment)
     void gotoComment() {
         Intent intent = getIntent();
-        intent.setClass(this,CommentActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("allNum",allNum);
-        intent.putExtra("shortNum",shortNum);
-        intent.putExtra("longNum",longNum);
+        intent.setClass(this, CommentActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("allNum", allNum);
+        intent.putExtra("shortNum", shortNum);
+        intent.putExtra("longNum", longNum);
         startActivity(intent);
     }
 
     @OnClick(R.id.tv_detail_bottom_share)
     void shareUrl() {
-        ShareUtil.shareText(mContext,shareUrl,"分享一篇文章");
+        ShareUtil.shareText(mContext, shareUrl, "分享一篇文章");
     }
 
     @OnClick(R.id.fab_like)
