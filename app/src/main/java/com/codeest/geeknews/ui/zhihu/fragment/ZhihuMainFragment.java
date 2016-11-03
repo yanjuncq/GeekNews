@@ -25,7 +25,7 @@ public class ZhihuMainFragment extends SimpleFragment {
     ViewPager mViewPager;
 
     String[] tabTitle = new String[]{"日报", "主题", "专栏", "热门"};
-    List<Fragment> fragments = new ArrayList<Fragment>();
+    List<Fragment> fragments = new ArrayList<>();
 
     ZhihuMainAdapter mAdapter;
 
